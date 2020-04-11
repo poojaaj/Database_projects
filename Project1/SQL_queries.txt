@@ -1,0 +1,59 @@
+SQL> CREATE TABLE country(
+  2  Country_name VARCHAR(20) PRIMARY KEY,
+  3  Population decimal(10,2),
+  4  No_of_worldcup_won int,
+  5  Manager VARCHAR(20)
+  6  );
+
+Table created.
+
+SQL> CREATE TABLE players(
+  2  Player_id int PRIMARY KEY,
+  3  Name VARCHAR(40),
+  4  Fame VARCHAR(20),
+  5  Lname VARCHAR(35),
+  6  DOB date,
+  7  country VARCHAR(20),
+  8  Height_cm INT,
+  9  Club VARCHAR(30),
+ 10  Position VARCHAR(10),
+ 11  Caps_for_country INT,
+ 12  IS_CAPTAIN VARCHAR(6),
+ 13  FOREIGN KEY (country) REFERENCES country(Country_name));
+
+Table created.
+
+SQL> CREATE TABLE match_results(
+  2  Match_id INT PRIMARY KEY,
+  3  Date_of_match DATE,
+  4  Start_time_of_match VARCHAR(8),
+  5  Team1 VARCHAR(25),
+  6  Team2 VARCHAR(25),
+  7  Team1_score INT,
+  8  Team2_score INT,
+  9  Stadium_name VARCHAR(35),
+ 10  Host_city VARCHAR(20),
+ 11  FOREIGN KEY (Team1) REFERENCES country(Country_name),
+ 12  FOREIGN KEY (Team2) REFERENCES country(Country_name));
+
+Table created.
+
+SQL> CREATE TABLE player_cards(
+  2  Player_id INT PRIMARY KEY,
+  3  Yellow_cards INT,
+  4  Red_cards INT,
+  5  FOREIGN KEY (Player_id) REFERENCES players(Player_id));
+
+Table created.
+
+SQL> CREATE TABLE player_assists_goals(
+  2  Player_id INT Primary KEY,
+  3  No_of_matches INT,
+  4  Goals INT,
+  5  Assists INT,
+  6  Minutes_played INT,
+  7  FOREIGN KEY (Player_id) REFERENCES players(Player_id));
+
+Table created.
+
+SQL> spool off
